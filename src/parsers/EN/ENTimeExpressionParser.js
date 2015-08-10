@@ -4,6 +4,7 @@
 */
 
 var moment = require('moment');
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -48,7 +49,7 @@ exports.Parser = function ENTimeExpressionParser(){
         
         // This pattern can be overlaped Ex. [12] AM, 1[2] AM
         if (match.index > 0 && text[match.index-1].match(/\w/)) return null;
-        var refMoment = moment(ref);
+        var refMoment = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
         var result = new ParsedResult();
         result.ref = ref;
         result.index = match.index + match[1].length;

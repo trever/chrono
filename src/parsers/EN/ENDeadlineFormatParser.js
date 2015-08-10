@@ -4,6 +4,7 @@
 */
 
 var moment = require('moment');
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -29,7 +30,7 @@ exports.Parser = function ENDeadlineFormatParser(){
         var num = match[3];
         num = parseInt(num);
 
-        var date = moment(ref);
+        var date = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
         if (match[4].match(/day/)) {
             date.add(num, 'd');
 

@@ -4,7 +4,7 @@
 */
 
 var moment = require('moment');
-
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -42,7 +42,7 @@ exports.Parser = function ENMonthNameLittleEndianParser(){
             ref: ref,
         });
 
-        var startMoment = moment(ref);
+        var startMoment = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
 
         var month = match[MONTH_NAME_GROUP];
         month = util.MONTH_OFFSET[month.toLowerCase()];

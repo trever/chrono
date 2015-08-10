@@ -4,6 +4,7 @@
 */
 
 var moment = require('moment');
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -25,7 +26,7 @@ exports.Parser = function ENCasualDateParser(){
             ref: ref,
         });
 
-        var refMoment = moment(ref);
+        var refMoment = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
         var startMoment = refMoment.clone();
         var lowerText = text.toLowerCase();
 
@@ -37,9 +38,9 @@ exports.Parser = function ENCasualDateParser(){
         } else if(lowerText == 'tomorrow' || lowerText == 'tmr'){
 
             // Check not "Tomorrow" on late night
-            if(refMoment.hour() > 4) {
+            // if(refMoment.hour() > 4) {
                 startMoment.add(1, 'day');
-            }
+            // }
 
         } else if(lowerText == 'yesterday') {
 

@@ -3,6 +3,7 @@
     
 */
 var moment = require('moment');
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -29,7 +30,7 @@ exports.Parser = function ENWeekdayParser() {
         var offset = DAYS_OFFSET[dayOfWeek];
         if(offset === undefined) return null;
         
-        var startMoment = moment(ref);
+        var startMoment = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
         var prefix = match[5];
         if (prefix) {
             prefix = prefix.toLowerCase();

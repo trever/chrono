@@ -4,6 +4,7 @@
 */
 
 var moment = require('moment');
+require('moment-timezone');
 var Parser = require('../parser').Parser;
 var ParsedResult = require('../../result').ParsedResult;
 
@@ -31,7 +32,7 @@ exports.Parser = function ENTimeAgoFormatParser(){
         var num = match[2];
         num = parseInt(num);
 
-        var date = moment(ref);
+        var date = opt.timezone ? moment(ref).tz(opt.timezone) : moment(ref);
         if (match[3].match(/day/)) {
 
             impliedComponents = []

@@ -36,6 +36,7 @@
     "coveralls": "npm run test && cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "moment": "^2.8.4"
+    "moment": "^2.8.4",
+    "moment-timezone": "^0.4.0"
   }
 }
